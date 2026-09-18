@@ -53,3 +53,23 @@ Return total_active_area, threshold_parcels, zone_counts,
 development_candidates, and intersecting_parcels.
 
 END
+
+## 3. Required Challenges
+
+### Challenge 1 – Change the Policy Without Rewriting the Algorithm
+
+I ran `development_candidates()` using two different parameter sets while keeping the function implementation unchanged.
+
+First run:
+- Minimum area: 5000.0 sqm
+- Allowed zones: Residential and Commercial
+- Development candidates: 45
+- Candidates inside study area: 9
+
+Second run:
+- Minimum area: 10000.0 sqm
+- Allowed zones: Residential and Commercial
+- Development candidates: 18
+- Candidates inside study area: 4
+
+Changing the parameters changed the results without requiring changes to the analysis function itself. This shows that the development policy can be changed through inputs rather than by rewriting the algorithm.
