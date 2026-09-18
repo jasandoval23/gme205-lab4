@@ -79,3 +79,11 @@ Changing the parameters changed the results without requiring changes to the ana
 The study-area result is produced by composing existing analysis functions. First, `development_candidates()` identifies parcels that satisfy the development rules. The resulting candidates are then passed to `intersecting_parcels()` to identify which candidates intersect the study area.
 
 This avoids repeating the active, zone, area, and intersection rules in one large conditional block.
+
+### Challenge 3 – Bad vs Good Refactor
+
+An example of a less structured approach would be putting the active, zone, area, and intersection checks inside one large nested conditional block.
+
+The final version separates the development rule into `is_development_candidate()` and uses `development_candidates()` to apply that rule to the parcels. The intersection check is also handled separately by `intersecting_parcels()`.
+
+This makes each function responsible for one part of the analysis and makes the logic easier to test and reuse.
