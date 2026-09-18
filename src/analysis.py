@@ -63,3 +63,42 @@ def intersecting_parcels(parcels, study_area):
             result.append(parcel)
 
     return result
+
+
+def classify_suitability_grid(slope_grid, flood_grid, max_slope, max_flood):
+    if len(slope_grid) != len(flood_grid):
+        raise ValueError("Slope and flood grids must have the same number of rows")
+
+    suitability_grid = []
+
+    for row_index in range(len(slope_grid)):
+        if len(slope_grid[row_index]) != len(flood_grid[row_index]):
+            raise ValueError("Slope and flood grids must have the same dimensions")
+
+        suitability_row = []
+
+        for col_index in range(len(slope_grid[row_index])):
+            slope = slope_grid[row_index][col_index]
+            flood = flood_grid[row_index][col_index]
+
+            if slope is None or flood is None:
+                suitability_row.append(None)
+            elif slope <= max_slope and flood <= max_flood:
+                suitability_row.append(1)
+            else:
+                suitability_row.append(0)
+
+        suitability_grid.append(suitability_row)
+
+    return suitability_grid
+
+
+def count_suitable_cells(suitability_grid):
+    count = 0
+
+    for row in suitability_grid:
+        for cell in row:
+            if cell == 1:
+                count += 1
+
+    return count
