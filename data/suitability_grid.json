@@ -1,0 +1,22 @@
+{
+  "description": "Small raster-style grid for GmE 205 Laboratory 4 structured-programming exercise.",
+  "criteria": {
+    "max_slope_deg": 15.0,
+    "max_flood_m": 0.5
+  },
+  "nodata": null,
+  "slope_deg": [
+    [5, 9, 17, 12, 8],
+    [14, 16, 11, 23, 7],
+    [null, 10, 15, 19, 13],
+    [4, 6, 8, 12, 18],
+    [20, 14, 9, 7, 5]
+  ],
+  "flood_m": [
+    [0.1, 0.6, 0.2, 0.4, 0.3],
+    [0.5, 0.4, 0.8, 0.2, 0.1],
+    [null, 0.2, 0.5, 0.7, 0.3],
+    [0.0, 0.4, 0.6, 0.5, 0.2],
+    [0.1, 0.5, 0.3, 0.9, 0.4]
+  ]
+}
