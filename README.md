@@ -73,3 +73,9 @@ Second run:
 - Candidates inside study area: 4
 
 Changing the parameters changed the results without requiring changes to the analysis function itself. This shows that the development policy can be changed through inputs rather than by rewriting the algorithm.
+
+### Challenge 2 – Compose, Do Not Duplicate
+
+The study-area result is produced by composing existing analysis functions. First, `development_candidates()` identifies parcels that satisfy the development rules. The resulting candidates are then passed to `intersecting_parcels()` to identify which candidates intersect the study area.
+
+This avoids repeating the active, zone, area, and intersection rules in one large conditional block.
