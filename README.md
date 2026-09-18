@@ -87,3 +87,13 @@ An example of a less structured approach would be putting the active, zone, area
 The final version separates the development rule into `is_development_candidate()` and uses `development_candidates()` to apply that rule to the parcels. The intersection check is also handled separately by `intersecting_parcels()`.
 
 This makes each function responsible for one part of the analysis and makes the logic easier to test and reuse.
+
+### Challenge 4 – Transfer the Algorithmic Pattern
+
+The vector and raster analyses both use repetition and selection, but the repeated structure is different.
+
+For vector data, the program loops through Parcel objects and applies analysis rules to each object. The Parcel object is responsible for its geometry and parcel attributes.
+
+For raster data, the program uses nested loops because a raster is represented as rows and columns of cells. Each cell is classified based on the slope and flood values.
+
+The overall pattern is similar: inspect an input, apply a rule, and produce a result. The main difference is the representation of the data.
