@@ -97,3 +97,33 @@ For vector data, the program loops through Parcel objects and applies analysis r
 For raster data, the program uses nested loops because a raster is represented as rows and columns of cells. Each cell is classified based on the slope and flood values.
 
 The overall pattern is similar: inspect an input, apply a rule, and produce a result. The main difference is the representation of the data.
+
+## 4. Reflection
+
+### 1. Algorithm
+
+For my vector analysis, I worked on identifying development candidates from the parcel data. Writing the algorithm and pseudocode first helped me break the problem into smaller steps before coding. It also helped me see which parts needed loops and which parts needed conditions. Because of this, I was able to separate the analysis into different functions instead of putting everything in one block.
+
+### 2. Control Flow
+
+Sequence can be seen in the order of loading the data, setting the parameters, running the analysis, and creating the outputs. Selection is used when the program checks conditions, such as whether a parcel is active, in an allowed zone, or large enough. Repetition is used when going through the parcels. For the raster, repetition happens through the rows and the cells in each row.
+
+### 3. Responsibility
+
+I kept geometry-related behavior in `SpatialObject` and `Parcel` because these classes represent the spatial objects. For example, the `intersects()` method deals with the geometry of the object. The analysis rules are in `analysis.py` because they describe what should be done with the data. I think separating these responsibilities makes the code easier to understand and test.
+
+### 4. Conditional Structure
+
+The development-candidate logic is separated into `is_development_candidate()` instead of putting all the conditions into one deeply nested block. The function checks if the parcel is active, if its zone is allowed, and if its area meets the minimum requirement. It returns `False` when a requirement is not met. This keeps `development_candidates()` simple because it only needs to apply the rule to each parcel.
+
+### 5. Area Meaning
+
+The exercise uses `area_sqm` because this is the area attribute provided in the parcel data and it represents the parcel area in square meters. I should not directly treat `geometry.area` as square meters because the parcel geometry is based on longitude and latitude coordinates. The geometry's area value would not automatically have square-meter units.
+
+### 6. Vector vs Raster
+
+For the vector data, the program repeats over the `Parcel` objects, with each iteration processing one parcel. For the raster data, the program uses a nested loop because the raster is represented as rows and columns of cells. The basic idea is still similar: go through the data, check the required conditions, and produce a result. The main difference is how the data is represented.
+
+### 7. Scale
+
+If there were one million parcels, the same separation between the object model, analysis functions, and runner would still be useful. However, the way the data is loaded and processed might need to be improved because of the larger amount of data. For a 10,000 × 10,000 raster, the nested-loop approach still follows the same algorithm, but processing time and memory would become bigger concerns. The overall structure could stay, but the implementation would need to be more efficient.
