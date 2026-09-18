@@ -1,6 +1,7 @@
 import math
 import csv
 from shapely.geometry import Point as ShapelyPoint
+from shapely.geometry import shape
 
 class SpatialObject:
     """Base abstraction for domain objects that have geometry."""
@@ -165,6 +166,17 @@ class Parcel(SpatialObject):
         super().__init__(geometry)
         self.parcel_id = parcel_id
         self.attributes = attributes
+
+    @classmethod
+    def from_dict(cls, record):
+        geometry = shape(record["geometry"])
+        attributes = {
+            "zone": record["zone"],
+            "is_active": record["is_active"],
+            "area_sqm": record["area_sqm"],
+        }
+        return cls(record["parcel_id"], geometry, attributes)
+    
     @property
     def area_sqm(self):
         return float(self.attributes["area_sqm"])
